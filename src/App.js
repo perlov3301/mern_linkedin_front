@@ -33,3 +33,6 @@ function App() {
 }
 
 export default App;
+
+// const response = await axios.get("http://localhost:8000/api/articles/learn-react");
+// const data = response.data;

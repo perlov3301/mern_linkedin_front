@@ -7,4 +7,9 @@ git add README.md
 git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/perlov3301/mern_linkedin_front.git
+or
+git remote set-url origin https://github.com/perlov3301/mern_linkedin
+_front.git
+git remote -v
 git push -u origin main
+
