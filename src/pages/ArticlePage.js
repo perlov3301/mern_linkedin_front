@@ -14,12 +14,13 @@ const ArticlePage = () => {
   const { articleId } =useParams();    
     useEffect(()=> {  // rerendering when value in the array changes
       a1= Math.ceil(Math.random()*10);
-      const response = axios.get(`http://localhost:8000/api/articles/${articleId}`);
+      const response = 
+        axios.get(`http://localhost:8000/api/articles/${articleId}`);
       //response has property 'data'
       console.log("articlePage;axios;response: "+response);
-      const articleInfo =response.data;
-      setArticleInfo({ upvotes: a1, comments: [] });
-    }, []); 
+      const newArticleInfo =response.data;
+      setArticleInfo(newArticleInfo);
+    }, []); // empty array is variable to look for 
    
     const article = articles.find((article)=> article.name === articleId);
     console.log("article:", article);

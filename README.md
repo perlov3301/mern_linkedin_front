@@ -13,3 +13,6 @@ _front.git
 git remote -v
 git push -u origin main
 
+*axios:network error
+Basically, before generating every response, you need to set header 'Access-Control-Allow-Origin' 
+to localhost:<port you visit in the browser>
