@@ -1,20 +1,26 @@
 // localhost:3000/articles/learn-node
 import { useState, useEffect } from 'react';// hooks
 import { useParams }              from 'react-router-dom'; // hook for catching article by ID
-import { unstable_HistoryRouter } from 'react-router-dom';
+import axios from 'axios';
 import {articles, test} from './article-content';
 import NotFoundPage from './NotFoundPage';
 
 const ArticlePage = () => {
-    const [aritcleInfo, setArticleInfo] = useState({ upvotes:0, comments: [] });
+    const [articleInfo, setArticleInfo] = useState({ upvotes:0, comments: [] });
     // simulation how useEffect look like
-    useEffect(()=> {
-      setArticleInfo({ upvotes: 3, comments: [] });
-    });
-   
-  //  const params = useParams(); // hook useParams
+    let a1;
+    //  const params = useParams(); // hook useParams
   //  const articleId = params.articleId; 
-    const { articleId } =useParams();
+  const { articleId } =useParams();    
+    useEffect(()=> {  // rerendering when value in the array changes
+      a1= Math.ceil(Math.random()*10);
+      const response = axios.get(`http://localhost:8000/api/articles/${articleId}`);
+      //response has property 'data'
+      console.log("articlePage;axios;response: "+response);
+      const articleInfo =response.data;
+      setArticleInfo({ upvotes: a1, comments: [] });
+    }, []); 
+   
     const article = articles.find((article)=> article.name === articleId);
     console.log("article:", article);
     if (!article) {
@@ -23,7 +29,7 @@ const ArticlePage = () => {
     return (
         <>
                   <h3>title:{ article.title}</h3>
-                  <p>This article has { aritcleInfo.upvotes } upvote(s)</p>
+                  <p>This article has { articleInfo.upvotes } upvote(s)</p>
                   <br /><b>content:</b>{ article.content.map((paragraph,i)=>
                     <p key={i}>{paragraph}</p>
                   ) }
