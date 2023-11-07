@@ -13,14 +13,15 @@ const ArticlePage = () => {
   //  const articleId = params.articleId; 
   const { articleId } =useParams();    
     useEffect(()=> {  // rerendering when value in the array changes
-      a1= Math.ceil(Math.random()*10);
-      const response = 
+      const loadArticleInfo = async ()=> {
+        const response = await 
         axios.get(`http://localhost:8000/api/articles/${articleId}`);
       //response has property 'data'
-      console.log("articlePage;axios;response: "+response);
-      const newArticleInfo =response.data;
-      setArticleInfo(newArticleInfo);
-    }, []); // empty array is variable to look for 
+        console.log("articlePage;axios;response: "+response);
+        const newArticleInfo =response.data;
+        setArticleInfo(newArticleInfo);
+      }     
+    }, []); // array is variables to look for 
    
     const article = articles.find((article)=> article.name === articleId);
     console.log("article:", article);
