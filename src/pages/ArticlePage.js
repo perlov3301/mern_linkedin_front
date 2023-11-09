@@ -2,29 +2,36 @@
 import { useState, useEffect } from 'react';// hooks
 import { useParams }              from 'react-router-dom'; // hook for catching article by ID
 import axios from 'axios';
+import CommentsList from '../components/CommentsList';
 import {articles, test} from './article-content';
 import NotFoundPage from './NotFoundPage';
 
 const ArticlePage = () => {
     const [articleInfo, setArticleInfo] = useState({ upvotes:0, comments: [] });
     // simulation how useEffect look like
-    let a1;
+    console.log("ArticlePage.js");
     //  const params = useParams(); // hook useParams
   //  const articleId = params.articleId; 
   const { articleId } =useParams();    
-    useEffect(()=> {  // rerendering when value in the array changes
+    useEffect(()=> {  
+      console.log("ArticlePage;useEffect");
       const loadArticleInfo = async ()=> {
-        const response = await 
-        axios.get(`http://localhost:8000/api/articles/${articleId}`);
+        // package.json:"proxy":"http://localhost:8000/"
+        const response = await  axios.get(`/api/articles/${articleId}`);
       //response has property 'data'
         console.log("articlePage;axios;response: "+response);
         const newArticleInfo =response.data;
         setArticleInfo(newArticleInfo);
       }     
-    }, []); // array is variables to look for 
+      loadArticleInfo();
+    }, [articleId]); // array is variables to look for 
    
     const article = articles.find((article)=> article.name === articleId);
-    console.log("article:", article);
+
+    const addUpvote = async () => {
+      
+    };
+  //  console.log("article:", article);
     if (!article) {
       return <NotFoundPage  />
     } 
@@ -35,6 +42,7 @@ const ArticlePage = () => {
                   <br /><b>content:</b>{ article.content.map((paragraph,i)=>
                     <p key={i}>{paragraph}</p>
                   ) }
+                  <CommentsList comments={articleInfo.comments} />
                   <br/>
         </>
         

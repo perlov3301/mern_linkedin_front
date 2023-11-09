@@ -16,3 +16,12 @@ git push -u origin main
 *axios:network error
 Basically, before generating every response, you need to set header 'Access-Control-Allow-Origin' 
 to localhost:<port you visit in the browser>
+or
+in front End add to package.json:
+"proxy":"http://localhost:8000/"
+plus within axios.get(url)
+instead of url=
+`http://localhost:8000/api/articles/${articleId}`
+url with proxy=
+`/api/articles/${articleId}`
+
