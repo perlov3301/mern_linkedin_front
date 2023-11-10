@@ -1,6 +1,6 @@
 // localhost:3000/articles/learn-node
 import { useState, useEffect } from 'react';// hooks
-import { useParams }              from 'react-router-dom'; // hook for catching article by ID
+import { useParams }  from 'react-router-dom'; // hook for catching articleID
 import axios from 'axios';
 import CommentsList from '../components/CommentsList';
 import {articles, test} from './article-content';
@@ -29,7 +29,9 @@ const ArticlePage = () => {
     const article = articles.find((article)=> article.name === articleId);
 
     const addUpvote = async () => {
-      
+        const response = await axios.put(`/api/articles/:name/upvote/${articleId}`);
+        const updatedArticle =response.data;
+        setArticleInfo(updatedArticle);
     };
   //  console.log("article:", article);
     if (!article) {
@@ -38,7 +40,15 @@ const ArticlePage = () => {
     return (
         <>
                   <h3>title:{ article.title}</h3>
-                  <p>This article has { articleInfo.upvotes } upvote(s)</p>
+                 
+                  <div className="upvote-section">
+                    <button  onClick={addUpvote} >Upvote</button>
+                    <p>This article has { articleInfo.upvotes } upvote(s)</p>
+                  </div>
+                  {/* <form action='/api/articles/:name/upvote' method='put' >
+                      <button type='submit'></button>
+                  </form> */}
+                   
                   <br /><b>content:</b>{ article.content.map((paragraph,i)=>
                     <p key={i}>{paragraph}</p>
                   ) }
