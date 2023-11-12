@@ -9,17 +9,15 @@ import NotFoundPage from './NotFoundPage';
 const ArticlePage = () => {
     const [articleInfo, setArticleInfo] = useState({ upvotes:0, comments: [] });
     // simulation how useEffect look like
-    console.log("ArticlePage.js");
     //  const params = useParams(); // hook useParams
   //  const articleId = params.articleId; 
   const { articleId } =useParams();    
     useEffect(()=> {  
-      console.log("ArticlePage;useEffect");
       const loadArticleInfo = async ()=> {
         // package.json:"proxy":"http://localhost:8000/"
         const response = await  axios.get(`/api/articles/${articleId}`);
       //response has property 'data'
-        console.log("articlePage;axios;response: "+response);
+        // console.log("articlePage;axios;response: "+Object.keys(response));
         const newArticleInfo =response.data;
         setArticleInfo(newArticleInfo);
       }     
@@ -29,7 +27,8 @@ const ArticlePage = () => {
     const article = articles.find((article)=> article.name === articleId);
 
     const addUpvote = async () => {
-        const response = await axios.put(`/api/articles/:name/upvote/${articleId}`);
+        const response = await axios.put(`/api/articles/${articleId}/upvote/`);
+        console.log("ArticlePagejs;addUpvote;response="+Object.keys(response));
         const updatedArticle =response.data;
         setArticleInfo(updatedArticle);
     };
@@ -42,11 +41,13 @@ const ArticlePage = () => {
                   <h3>title:{ article.title}</h3>
                  
                   <div className="upvote-section">
-                    <button  onClick={addUpvote} >Upvote</button>
+                    <button 
+                     onClick={addUpvote} 
+                     >Upvote</button>
                     <p>This article has { articleInfo.upvotes } upvote(s)</p>
                   </div>
-                  {/* <form action='/api/articles/:name/upvote' method='put' >
-                      <button type='submit'></button>
+                  {/* <form action='api/articles/learn-react/upvote' method='put' >
+                      <button type='submit'>Upvote</button>
                   </form> */}
                    
                   <br /><b>content:</b>{ article.content.map((paragraph,i)=>

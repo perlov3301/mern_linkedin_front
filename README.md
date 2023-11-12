@@ -18,7 +18,8 @@ Basically, before generating every response, you need to set header 'Access-Cont
 to localhost:<port you visit in the browser>
 or
 in front End add to package.json:
-"proxy":"http://localhost:8000/"
+"proxy":"http://localhost:8000/",
+"allowedHosts": ["localhos"],
 plus within axios.get(url)
 instead of url=
 `http://localhost:8000/api/articles/${articleId}`
