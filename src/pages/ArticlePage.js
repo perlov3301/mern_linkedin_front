@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';// hooks
 import { useParams }  from 'react-router-dom'; // hook for catching articleID
 import axios from 'axios';
 import CommentsList from '../components/CommentsList';
+import AddCommentForm from '../components/AddCommentForm';
 import {articles, test} from './article-content';
 import NotFoundPage from './NotFoundPage';
 
@@ -28,7 +29,7 @@ const ArticlePage = () => {
 
     const addUpvote = async () => {
         const response = await axios.put(`/api/articles/${articleId}/upvote/`);
-        console.log("ArticlePagejs;addUpvote;response="+Object.keys(response));
+        // console.log("ArticlePagejs;addUpvote;response="+Object.keys(response));
         const updatedArticle =response.data;
         setArticleInfo(updatedArticle);
     };
@@ -54,6 +55,10 @@ const ArticlePage = () => {
                     <p key={i}>{paragraph}</p>
                   ) }
                   <CommentsList comments={articleInfo.comments} />
+                  <AddCommentForm 
+                    articleName={articleId} 
+                    onArticleUpdated={updatedArticle=>setArticleInfo(updatedArticle)}
+                    />
                   <br/>
         </>
         
