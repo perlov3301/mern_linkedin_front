@@ -54,12 +54,13 @@ const ArticlePage = () => {
                   <br /><b>content:</b>{ article.content.map((paragraph,i)=>
                     <p key={i}>{paragraph}</p>
                   ) }
-                  <CommentsList comments={articleInfo.comments} />
+                
                   <AddCommentForm 
                     articleName={articleId} 
                     onArticleUpdated={updatedArticle=>setArticleInfo(updatedArticle)}
                     />
                   <br/>
+                  <CommentsList comments={articleInfo.comments} />
         </>
         
     )

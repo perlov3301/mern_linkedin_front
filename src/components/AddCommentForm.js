@@ -1,4 +1,5 @@
 import {  useState } from 'react';
+import axios from 'axios';
 
 const AddCommentForm = ({ articleName, onArticleUpdated }) => {
     const [name, setName] = useState("");
@@ -32,7 +33,8 @@ const AddCommentForm = ({ articleName, onArticleUpdated }) => {
                   onChange={e => setCommentText(e.target.value)}
                   rows="4" cols="50" />
             </label>
-            <button onClick={addComment}
+            <button type='button' className='styled_button'
+            onClick={addComment}
               >Add Comment</button>
         </div>
     );
