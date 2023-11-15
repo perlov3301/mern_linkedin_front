@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import { Routes, Route, Link } from "react-router-dom";
 import NavBar from './NavBar';
-import Home from './pages/Home';
+// import Home from './pages/Home';
 import About from './pages/About';
 import Data from './pages/Data';
 import HomePage from './pages/HomePage';
@@ -10,6 +10,8 @@ import AboutPage from './pages/AboutPage';
 import ArticlesListPage from './pages/ArticlesListPage';
 import ArticlePage from './pages/ArticlePage';
 import NotFoundPage from './pages/NotFoundPage';
+import LoginPage from './pages/LoginPage';
+import CreateAccountPage from './pages/CreateAccountPage';
 
 
 function App() {
@@ -18,14 +20,16 @@ function App() {
       <NavBar />
       <div id="page-body">
       <Routes>
-        <Route path="about-rr1"     element={<About />} />
-        <Route path="data"          element={<Data />} />
+        {/* <Route path="about-rr1"     element={<About />} /> */}
+        {/* <Route path="data"          element={<Data />} /> */}
         <Route path="/"             element={<HomePage />} />
-        <Route path="about"         element={<AboutPage/>} />
-        <Route path="articles"      element={<ArticlesListPage />} />
-        <Route path="articles/:articleId" element={<ArticlePage />} />
+        <Route path="/about"         element={<AboutPage/>} />
+        <Route path="/articles"      element={<ArticlesListPage />} />
+        <Route path="/articles/:articleId" element={<ArticlePage />} />
         <Route path="*"  element={<NotFoundPage />} /> 
-        <Route path="articles/:*"  element={<NotFoundPage />} />             
+        {/* <Route path="/articles/:/*"  element={<NotFoundPage />} />      */}
+        <Route path="/login" element={<LoginPage/> } />       
+        <Route path="/create-account" element={<CreateAccountPage  />}  />
       </Routes>
       </div>
     </div>

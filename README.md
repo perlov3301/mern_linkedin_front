@@ -26,3 +26,5 @@ instead of url=
 url with proxy=
 `/api/articles/${articleId}`
 
+add firebase: create account for authorization=>add first custom=>install firabase in frontend in package.json=> in firebase console choose web=> copy paste code within index.js
+
